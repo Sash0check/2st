@@ -1,0 +1,36 @@
+#include <stdio.h>
+void fnevyaz(FILE*fp,int **mas,int chc,int maxx,int maxy,int **centr,int n){
+int i,j,k,t;
+  float sq (float x){
+return (x*x);;
+}
+
+int own[chc];
+float sumNevyaz,nev;
+sumNevyaz=0;
+
+  float nevyaz=  sq(maxx)+sq(maxy) ;
+t=0;
+
+for (k=1;k<=20;++k){
+for (j=1;j<chc+1;j++){
+        nevyaz=  sq(maxx)+sq(maxy) ;
+  for (i=1;i<=n;++i){
+      nev = sq ( abs ( mas[j][1] - centr[k][i][1] ) )
+          + sq ( abs ( mas[j][2] - centr[k][i][2] ) );
+
+        if (nev<nevyaz) {
+          nevyaz=nev;
+          t=i;
+
+      }
+  }
+
+sumNevyaz=sumNevyaz+nevyaz;
+  own[j]=t;
+  printf ("%d ",own[j]);
+  }
+}
+  printf ("%d\n");
+printf ("%f",sumNevyaz);
+}
