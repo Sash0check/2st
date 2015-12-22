@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+//#include "nevyazka.c"
+//1-per
+//2-plosh
+int * onab(int,int,int);
+
+main ()
+{
+    FILE*fp;
+fp=fopen("koord.txt","r");
+int i,j,h,k,n,chc,maxx,maxy;
+
+fscanf(fp,"%d\n",&chc);
+//int mas[chc][2];
+//int centr[n][2];
+int **mas = malloc (sizeof(int*)*(chc+1));
+for(i=0;i<chc+1;++i){
+	mas[i]=malloc(sizeof(int)*2);
+}
+
+for (i=1;i<chc+1;i++){
+    fscanf(fp,"%d %d\n",&mas[i][1],&mas[i][2]);
+
+}
+
+
+//printf("%d %d\n",mas[1][1],mas[1][2]);
+
+
+
+maxx=0;
+maxy=0;
+for (i=1;i<chc+1;++i){
+    if (mas[i][1]> maxx) maxx=mas[i][1];
+    if (mas[i][2]> maxx) maxy=mas[i][2];
+}
+
+srand(time(NULL));
+printf("vvodim centy ");
+scanf("%d",&n);
+
+/*
+int ***centr = malloc (sizeof(int*)*(20));
+for(i=0;i<20+1;++i){
+    int **arr = malloc(sizeof(int)*n);
+    centr[i]=arr;
+
+     for(j=0;j<n+1;++j){
+	arr[j]=malloc(sizeof(int)*2);
+}
+}*/
+
+
+
+
+
+int ***nabors[20];
+for (i=1;i<=20;++i){
+     nabors[i]=onab(n,maxx,maxy);
+}
+
+for (i=1;i<=20;++i){
+    for (j=1;j<=n;++j){
+            printf("QWEQWEQWEQWE\n");
+            fflush(stdout);
+            int qqq = nabors[i][j][1];
+            int www = nabors[i][j][2];
+            printf("QWEQWEQWEQWE\n");
+            fflush(stdout);
+            printf("%d %d\n",qqq,www);
+}
+}
+
+//fnevyaz (fp,mas,chc,maxx,maxy,centr,n);
+}
+
+int * onab(int n,int maxx,int maxy ){
+int i,j;
+    int **centr = malloc (sizeof(int*)*(n+1));
+    for(i=0;i<n+1;++i){
+        centr[i]=malloc(sizeof(int)*2);
+    }
+    for (j=1;j<=n;++j){
+        centr[j][1]=1+rand() %maxx;
+        centr[j][2]=1+rand() %maxy;
+ // printf("%d %d\n",centr[i][j][1],centr[i][j][2]);
+
+    }
+    return centr[n][2];
+}
